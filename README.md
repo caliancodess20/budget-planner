@@ -38,4 +38,4 @@ python budget_planner.py
 - JSON for data storage
 
 ## Author
-Sanskruti
+Sanskruti Chanekar
