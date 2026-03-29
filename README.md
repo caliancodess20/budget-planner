@@ -22,7 +22,7 @@ cd budget_planner
 
 Run the app:
 
-python budget_planner.py
+![budget-planner/budget_data.json/budget_planner.py]
 
 ## How to use
 
