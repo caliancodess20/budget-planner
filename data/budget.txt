@@ -1,0 +1,2 @@
+INCOME,Scholarship,5000.0
+EXPENSE,food,500.0,FOOD

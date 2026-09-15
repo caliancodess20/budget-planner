@@ -1,4 +1,3 @@
-```java
 import java.util.ArrayList;
 
 public class BudgetPlanner {
@@ -82,9 +81,7 @@ public class BudgetPlanner {
                 transactions.remove(index);
                 System.out.println("Expense deleted successfully.");
             } else {
-                System.out.println(
-                        "Selected transaction is not an expense."
-                );
+                System.out.println("Selected transaction is not an expense.");
             }
 
         } else {
@@ -97,6 +94,3 @@ public class BudgetPlanner {
         System.out.println("Data loaded successfully.");
     }
 }
-```
-
-

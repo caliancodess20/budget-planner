@@ -20,6 +20,7 @@ public class FileManager {
             for (Transaction transaction : transactions) {
 
                 if (transaction instanceof Income) {
+
                     writer.write("INCOME,"
                             + transaction.getDescription()
                             + ","
@@ -60,6 +61,7 @@ public class FileManager {
         }
 
         try {
+
             BufferedReader reader =
                     new BufferedReader(new FileReader(FILE_NAME));
 
