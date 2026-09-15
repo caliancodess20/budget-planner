@@ -1,3 +1,4 @@
+```java
 import java.util.Scanner;
 
 public class Main {
@@ -19,13 +20,14 @@ public class Main {
             System.out.println("5. Search Expense");
             System.out.println("6. Delete Expense");
             System.out.println("7. Show Budget Summary");
-            System.out.println("8. Exit");
+            System.out.println("8. Save Data");
+            System.out.println("9. Load Data");
+            System.out.println("10. Exit");
             System.out.print("Enter your choice: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-
             try {
+
+                int choice = Integer.parseInt(scanner.nextLine());
 
                 switch (choice) {
 
@@ -34,8 +36,8 @@ public class Main {
                         String incomeDescription = scanner.nextLine();
 
                         System.out.print("Enter income amount: ₹");
-                        double incomeAmount = scanner.nextDouble();
-                        scanner.nextLine();
+                        double incomeAmount =
+                                Double.parseDouble(scanner.nextLine());
 
                         if (incomeAmount <= 0) {
                             throw new InvalidAmountException(
@@ -44,7 +46,10 @@ public class Main {
                         }
 
                         planner.addTransaction(
-                                new Income(incomeDescription, incomeAmount)
+                                new Income(
+                                        incomeDescription,
+                                        incomeAmount
+                                )
                         );
                         break;
 
@@ -53,8 +58,8 @@ public class Main {
                         String expenseDescription = scanner.nextLine();
 
                         System.out.print("Enter expense amount: ₹");
-                        double expenseAmount = scanner.nextDouble();
-                        scanner.nextLine();
+                        double expenseAmount =
+                                Double.parseDouble(scanner.nextLine());
 
                         if (expenseAmount <= 0) {
                             throw new InvalidAmountException(
@@ -63,15 +68,18 @@ public class Main {
                         }
 
                         System.out.println("Select Category:");
+
                         Category[] categories = Category.values();
 
                         for (int i = 0; i < categories.length; i++) {
-                            System.out.println((i + 1) + ". " + categories[i]);
+                            System.out.println(
+                                    (i + 1) + ". " + categories[i]
+                            );
                         }
 
                         System.out.print("Enter category number: ");
-                        int categoryChoice = scanner.nextInt();
-                        scanner.nextLine();
+                        int categoryChoice =
+                                Integer.parseInt(scanner.nextLine());
 
                         if (categoryChoice < 1 ||
                                 categoryChoice > categories.length) {
@@ -80,7 +88,8 @@ public class Main {
                             break;
                         }
 
-                        Category category = categories[categoryChoice - 1];
+                        Category category =
+                                categories[categoryChoice - 1];
 
                         planner.addTransaction(
                                 new Expense(
@@ -113,13 +122,14 @@ public class Main {
                                 "\nEnter transaction number to delete: "
                         );
 
-                        int index = scanner.nextInt();
-                        scanner.nextLine();
+                        int index =
+                                Integer.parseInt(scanner.nextLine());
 
                         planner.deleteExpense(index - 1);
                         break;
 
                     case 7:
+
                         double income =
                                 BudgetCalculator.calculateIncome(
                                         planner.getTransactions()
@@ -138,38 +148,68 @@ public class Main {
                         System.out.println("\n===== BUDGET SUMMARY =====");
                         System.out.println("Total Income: ₹" + income);
                         System.out.println("Total Expense: ₹" + expense);
-                        System.out.println("Remaining Balance: ₹" + balance);
+                        System.out.println(
+                                "Remaining Balance: ₹" + balance
+                        );
 
                         if (balance > 0) {
-                            System.out.println("Status: You are within budget.");
+                            System.out.println(
+                                    "Status: You are within budget."
+                            );
                         } else if (balance == 0) {
-                            System.out.println("Status: Budget fully used.");
+                            System.out.println(
+                                    "Status: Budget fully used."
+                            );
                         } else {
-                            System.out.println("Status: You have exceeded your budget.");
+                            System.out.println(
+                                    "Status: You have exceeded your budget."
+                            );
                         }
 
                         break;
 
                     case 8:
+                        FileManager.saveTransactions(
+                                planner.getTransactions()
+                        );
+                        break;
+
+                    case 9:
+                        planner.loadTransactions();
+                        break;
+
+                    case 10:
                         running = false;
-                        System.out.println("Thank you for using Budget Planner!");
+                        System.out.println(
+                                "Thank you for using Budget Planner!"
+                        );
                         break;
 
                     default:
-                        System.out.println("Invalid choice. Please try again.");
+                        System.out.println(
+                                "Invalid choice. Please try again."
+                        );
                 }
 
             } catch (InvalidAmountException e) {
 
                 System.out.println("Error: " + e.getMessage());
 
+            } catch (NumberFormatException e) {
+
+                System.out.println(
+                        "Invalid input. Please enter a valid number."
+                );
+
             } catch (Exception e) {
 
-                System.out.println("Invalid input. Please try again.");
-                scanner.nextLine();
+                System.out.println(
+                        "Something went wrong. Please try again."
+                );
             }
         }
 
         scanner.close();
     }
 }
+```
