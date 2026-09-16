@@ -7,6 +7,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         BudgetPlanner planner = new BudgetPlanner();
 
+        BudgetAlertThread alertThread =
+                new BudgetAlertThread(planner);
+
+        alertThread.setDaemon(true);
+        alertThread.start();
+
         boolean running = true;
 
         while (running) {
@@ -19,9 +25,10 @@ public class Main {
             System.out.println("5. Search Expense");
             System.out.println("6. Delete Expense");
             System.out.println("7. Show Budget Summary");
-            System.out.println("8. Save Data");
-            System.out.println("9. Load Data");
-            System.out.println("10. Exit");
+            System.out.println("8. Set Budget Limit");
+            System.out.println("9. Save Data");
+            System.out.println("10. Load Data");
+            System.out.println("11. Exit");
             System.out.print("Enter your choice: ");
 
             try {
@@ -34,7 +41,7 @@ public class Main {
                         System.out.print("Enter income description: ");
                         String incomeDescription = scanner.nextLine();
 
-                        System.out.print("Enter income amount: ₹");
+                        System.out.print("Enter income amount: ");
                         double incomeAmount =
                                 Double.parseDouble(scanner.nextLine());
 
@@ -56,7 +63,7 @@ public class Main {
                         System.out.print("Enter expense description: ");
                         String expenseDescription = scanner.nextLine();
 
-                        System.out.print("Enter expense amount: ₹");
+                        System.out.print("Enter expense amount: ");
                         double expenseAmount =
                                 Double.parseDouble(scanner.nextLine());
 
@@ -145,11 +152,28 @@ public class Main {
                                 );
 
                         System.out.println("\n===== BUDGET SUMMARY =====");
-                        System.out.println("Total Income: ₹" + income);
-                        System.out.println("Total Expense: ₹" + expense);
+                        System.out.println("Total Income: " + income);
+                        System.out.println("Total Expense: " + expense);
                         System.out.println(
-                                "Remaining Balance: ₹" + balance
+                                "Remaining Balance: " + balance
                         );
+
+                        if (planner.getBudgetLimit() > 0) {
+
+                            System.out.println(
+                                    "Budget Limit: "
+                                    + planner.getBudgetLimit()
+                            );
+
+                            double percentage =
+                                    (expense /
+                                    planner.getBudgetLimit()) * 100;
+
+                            System.out.println(
+                                    "Budget Used: "
+                                    + percentage + "%"
+                            );
+                        }
 
                         if (balance > 0) {
                             System.out.println(
@@ -168,16 +192,39 @@ public class Main {
                         break;
 
                     case 8:
+
+                        System.out.print(
+                                "Enter your budget limit: "
+                        );
+
+                        double budget =
+                                Double.parseDouble(scanner.nextLine());
+
+                        if (budget <= 0) {
+                            throw new InvalidAmountException(
+                                    "Budget limit must be greater than zero."
+                            );
+                        }
+
+                        planner.setBudgetLimit(budget);
+
+                        System.out.println(
+                                "Budget limit set successfully."
+                        );
+
+                        break;
+
+                    case 9:
                         FileManager.saveTransactions(
                                 planner.getTransactions()
                         );
                         break;
 
-                    case 9:
+                    case 10:
                         planner.loadTransactions();
                         break;
 
-                    case 10:
+                    case 11:
                         running = false;
                         System.out.println(
                                 "Thank you for using Budget Planner!"

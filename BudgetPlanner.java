@@ -3,9 +3,11 @@ import java.util.ArrayList;
 public class BudgetPlanner {
 
     private ArrayList<Transaction> transactions;
+    private double budgetLimit;
 
     public BudgetPlanner() {
         transactions = new ArrayList<>();
+        budgetLimit = 0;
     }
 
     public void addTransaction(Transaction transaction) {
@@ -15,6 +17,14 @@ public class BudgetPlanner {
 
     public ArrayList<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public void setBudgetLimit(double budgetLimit) {
+        this.budgetLimit = budgetLimit;
+    }
+
+    public double getBudgetLimit() {
+        return budgetLimit;
     }
 
     public void viewTransactions() {
