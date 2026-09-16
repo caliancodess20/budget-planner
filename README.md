@@ -1,494 +1,393 @@
-\# Budget Planner
+# Budget Planner
 
+A simple command-line Budget Planner built using Java. The project helps users manage income and expenses, calculate their remaining balance, search and delete expenses, save and load data, and receive budget alerts.
 
+## Features
 
-A simple command-line Budget Planner application developed in Java.
+* Add income
+* Add expenses
+* Categorize expenses
+* View all transactions
+* View expenses separately
+* Search expenses
+* Delete expenses
+* Calculate total income, total expenses, and remaining balance
+* Set a budget limit
+* Receive automatic budget warnings
+* Save transaction data to a file
+* Load previously saved transaction data
+* Handle invalid user input and invalid amounts
 
+## Technologies Used
 
+* Java
+* Object-Oriented Programming (OOP)
+* ArrayList
+* Inheritance
+* Polymorphism
+* Enum
+* Exception Handling
+* Multithreading
+* File I/O
 
-The application allows users to record income and expenses, view transactions, search and delete expenses, calculate the remaining balance, and save/load budget data using a text file.
-
-
-
-\## Features
-
-
-
-\* Add income
-
-\* Add expenses
-
-\* Categorize expenses
-
-\* View all transactions
-
-\* View expenses
-
-\* Search expenses
-
-\* Delete expenses
-
-\* Calculate total income
-
-\* Calculate total expenses
-
-\* Calculate remaining balance
-
-\* Save data to a text file
-
-\* Load previously saved data
-
-\* Handle invalid amount and input errors
-
-
-
-\## Technologies Used
-
-
-
-\* Java
-
-\* Object-Oriented Programming (OOP)
-
-\* ArrayList
-
-\* Inheritance
-
-\* Polymorphism
-
-\* Enum
-
-\* Exception Handling
-
-\* File I/O
-
-\* BufferedReader
-
-\* BufferedWriter
-
-\* Command-Line Interface
-
-
-
-\## Project Structure
-
-
+## Project Structure
 
 ```text
-
 budget-planner/
-
 │
-
 ├── Main.java
-
 ├── BudgetPlanner.java
-
 ├── Transaction.java
-
 ├── Income.java
-
 ├── Expense.java
-
 ├── Category.java
-
 ├── BudgetCalculator.java
-
 ├── InvalidAmountException.java
-
 ├── FileManager.java
-
+├── BudgetAlertThread.java
 │
-
 ├── data/
-
 │   └── budget.txt
-
 │
-
 ├── README.md
-
-└── .gitignore
-
+└── Project_Report.pdf
 ```
 
+## Class Description
 
+### Main.java
 
-\## Class Description
+Contains the main method and provides the command-line menu through which the user interacts with the application.
 
+### BudgetPlanner.java
 
+Manages the collection of transactions and provides operations such as adding, viewing, searching, deleting, and loading transactions.
 
-\### Main.java
+### Transaction.java
 
+Acts as the base class for transactions and contains common properties such as description and amount.
 
+### Income.java
 
-Contains the main method and command-line menu. It takes input from the user and calls the required operations.
+Extends `Transaction` and represents income records.
 
+### Expense.java
 
+Extends `Transaction` and represents expense records. It also stores the expense category.
 
-\### BudgetPlanner.java
+### Category.java
 
+An enum containing predefined expense categories such as Food, Travel, Education, Shopping, Bills, Entertainment, Health, and Other.
 
+### BudgetCalculator.java
 
-Manages the collection of transactions using `ArrayList<Transaction>`. It provides operations such as adding, viewing, searching, and deleting transactions.
+Calculates total income, total expenses, and remaining balance.
 
+### InvalidAmountException.java
 
+A custom exception used to handle invalid or non-positive transaction amounts.
 
-\### Transaction.java
+### FileManager.java
 
+Handles saving transaction data to `data/budget.txt` and loading it back into the application.
 
+### BudgetAlertThread.java
 
-The base class for transactions. It stores common transaction information such as description and amount.
+Runs a separate thread that periodically checks the total expenses against the budget limit and displays a warning when spending reaches 80% or more and an alert when the budget is exceeded.
 
+## How to Run
 
-
-\### Income.java
-
-
-
-Extends the `Transaction` class and represents an income transaction.
-
-
-
-\### Expense.java
-
-
-
-Extends the `Transaction` class and represents an expense. It also stores the expense category.
-
-
-
-\### Category.java
-
-
-
-An enum containing the available expense categories such as Food, Travel, Education, Shopping, Bills, Entertainment, Health, and Other.
-
-
-
-\### BudgetCalculator.java
-
-
-
-Contains methods for calculating total income, total expenses, and remaining balance.
-
-
-
-\### InvalidAmountException.java
-
-
-
-A custom exception used when the user enters an amount that is zero or negative.
-
-
-
-\### FileManager.java
-
-
-
-Handles saving transactions to and loading transactions from the `data/budget.txt` text file.
-
-
-
-\## How to Run the Project
-
-
-
-\### Step 1: Install Java
-
-
+### Step 1: Install Java
 
 Make sure Java JDK is installed on your computer.
 
-
-
-Check the Java version using:
-
-
+Check the installation using:
 
 ```bash
-
 java -version
-
-```
-
-
-
-Check the Java compiler using:
-
-
-
-```bash
-
 javac -version
-
 ```
 
-
-
-\### Step 2: Open the Project Folder
-
-
-
-Open a terminal or command prompt and navigate to the project folder.
-
-
-
-Example:
-
-
+### Step 2: Clone the Repository
 
 ```bash
+git clone https://github.com/caliancodess20/budget-planner.git
+```
 
+### Step 3: Open the Project Folder
+
+```bash
 cd budget-planner
-
 ```
 
+### Step 4: Compile the Java Files
 
+On Windows PowerShell:
 
-\### Step 3: Compile the Java Files
-
-
-
-Compile all Java source files using:
-
-
-
-```bash
-
-javac \*.java
-
+```powershell
+javac (Get-ChildItem *.java).Name
 ```
 
-
-
-\### Step 4: Run the Application
-
-
-
-Run the program using:
-
-
+On Command Prompt/Linux/macOS:
 
 ```bash
+javac *.java
+```
 
+### Step 5: Run the Program
+
+```bash
 java Main
-
 ```
 
+No GUI or additional software is required to run the application.
 
-
-\## Menu Options
-
-
-
-When the application starts, the following menu is displayed:
-
-
+## Menu Options
 
 ```text
-
 ===== BUDGET PLANNER =====
 
-1\. Add Income
-
-2\. Add Expense
-
-3\. View All Transactions
-
-4\. View Expenses
-
-5\. Search Expense
-
-6\. Delete Expense
-
-7\. Show Budget Summary
-
-8\. Save Data
-
-9\. Load Data
-
-10\. Exit
-
+1. Add Income
+2. Add Expense
+3. View All Transactions
+4. View Expenses
+5. Search Expense
+6. Delete Expense
+7. Show Budget Summary
+8. Set Budget Limit
+9. Save Data
+10. Load Data
+11. Exit
 ```
 
+## Data Storage
 
-
-Select an option by entering its corresponding number.
-
-
-
-\## Data Storage
-
-
-
-Budget data is stored in:
-
-
+Transaction data is stored in:
 
 ```text
-
 data/budget.txt
-
 ```
 
+The application automatically creates the `data` folder when saving data if it does not already exist.
 
+The current implementation stores transaction records in a text-file format. The budget limit itself is not persisted between program restarts.
 
-The application creates the `data` folder automatically when the user selects the Save Data option.
-
-
-
-The saved file contains transaction information that can be loaded again using the Load Data option.
-
-
-
-\## Example
-
-
-
-Example transactions:
-
-
+## Example
 
 ```text
+Enter income description: Scholarship
+Enter income amount: ₹10000
 
-Income: Scholarship
+Transaction added successfully.
 
-Amount: ₹5000
+Enter expense description: Food
+Enter expense amount: ₹200
 
+Select Category:
+1. FOOD
+2. TRAVEL
+3. EDUCATION
+4. SHOPPING
+5. BILLS
+6. ENTERTAINMENT
+7. HEALTH
+8. OTHER
 
+Enter category number: 1
 
-Expense: Food
-
-Amount: ₹500
-
-Category: FOOD
-
+Transaction added successfully.
 ```
 
-
-
-The budget summary will display:
-
-
+The budget summary displays:
 
 ```text
+===== BUDGET SUMMARY =====
 
-Total Income: ₹5000.0
-
-Total Expense: ₹500.0
-
-Remaining Balance: ₹4500.0
-
+Total Income: ₹10000.0
+Total Expense: ₹200.0
+Remaining Balance: ₹9800.0
 Status: You are within budget.
-
 ```
 
+## Object-Oriented Programming Concepts Used
 
+### Encapsulation
 
-\## OOP Concepts Used
+Private variables are used inside classes and accessed through methods such as getters.
 
+### Inheritance
 
+`Income` and `Expense` inherit common properties and methods from `Transaction`.
 
-The project demonstrates several Java Object-Oriented Programming concepts.
+### Polymorphism
 
+The application stores different transaction objects using:
 
+```java
+ArrayList<Transaction>
+```
 
-\### Encapsulation
+The overridden `displayTransaction()` method behaves differently for `Income` and `Expense`.
 
+### Abstraction
 
+Common transaction-related properties and operations are placed in the base `Transaction` class.
 
-Transaction data is kept private and accessed through methods such as getters.
+## Exception Handling
 
+The project uses exception handling to prevent the program from terminating because of invalid input.
 
+A custom exception called `InvalidAmountException` is used when the user enters an amount less than or equal to zero.
 
-\### Inheritance
+`NumberFormatException` is also handled when the user enters invalid numeric input.
 
+## Multithreading
 
+The project uses a separate `BudgetAlertThread` to monitor expenses periodically.
 
-`Income` and `Expense` inherit common properties and methods from the `Transaction` class.
+The thread:
 
+* Checks total expenses every 10 seconds.
+* Compares expenses with the user-defined budget limit.
+* Displays a warning when 80% or more of the budget is used.
+* Displays an alert when the budget is exceeded.
+* Avoids repeatedly displaying the same warning or alert.
 
+## File Handling
 
-\### Polymorphism
+Java File I/O is used to store and retrieve transaction data.
 
+The project uses:
 
+* `File`
+* `FileWriter`
+* `BufferedWriter`
+* `FileReader`
+* `BufferedReader`
 
-The application stores both `Income` and `Expense` objects in an `ArrayList<Transaction>` and uses method overriding for `displayTransaction()`.
+This allows transaction data to remain available after the program is closed and reopened.
 
+## Architecture
 
+```text
+                Transaction
+                /         \
+            Income       Expense
+                            |
+                         Category
 
-\### Abstraction of Responsibilities
+                BudgetPlanner
+                       |
+              ArrayList<Transaction>
+                       |
+                BudgetCalculator
+                       |
+                  File I/O
+```
 
+### Budget Alert
 
+```text
+Main Thread
+     |
+User interacts with menu
+     |
+BudgetAlertThread
+     |
+Checks expenses every 10 seconds
+     |
+Budget warning / alert
+```
 
-Different classes are responsible for different tasks such as transaction management, calculation, and file handling.
+## Challenges Faced
 
+* **Handling different transaction types:** Managing both income and expense records using a common `Transaction` reference required proper use of inheritance and polymorphism.
 
+* **Input validation:** Invalid or negative amounts had to be handled using a custom `InvalidAmountException`.
 
-\## Exception Handling
+* **File handling:** Saving and loading transaction data from a text file required proper use of Java I/O classes such as `BufferedWriter` and `BufferedReader`.
 
+* **Data restoration:** The program had to recreate `Income` and `Expense` objects correctly when loading previously saved data.
 
+* **Budget monitoring:** Implementing the budget alert feature required a separate thread to periodically check total expenses against the budget limit.
 
-The application handles invalid user input using exception handling.
+* **Menu-based interaction:** The command-line menu had to handle different user choices and invalid inputs without terminating the program unexpectedly.
 
+* **Data organization:** Maintaining transactions in an `ArrayList<Transaction>` made it easier to manage multiple transaction types while demonstrating Java Collections.
 
+## Testing
 
-A custom `InvalidAmountException` is used when an income or expense amount is less than or equal to zero.
+The application was tested for the following cases:
 
+| Test Case                   | Expected Result                         |
+| --------------------------- | --------------------------------------- |
+| Add valid income            | Income added successfully               |
+| Add valid expense           | Expense added successfully              |
+| Enter negative amount       | Custom error message displayed          |
+| Enter invalid numeric input | Input error displayed                   |
+| View transactions           | All stored transactions displayed       |
+| Search expense              | Matching expenses displayed             |
+| Delete expense              | Selected expense removed                |
+| Calculate summary           | Income, expense, and balance calculated |
+| Save data                   | Data stored in `budget.txt`             |
+| Load data                   | Saved transactions restored             |
+| Reach 80% budget usage      | Budget warning displayed                |
+| Exceed budget               | Budget alert displayed                  |
 
+## Limitations
 
-`NumberFormatException` is also handled when the user enters an invalid numeric value.
+* The application uses a command-line interface instead of a graphical interface.
+* Transaction descriptions containing commas may not be handled correctly because the current file format uses commas as separators.
+* The budget limit is not saved to the data file and resets when the application is restarted.
+* Data is stored in a text file instead of a database.
+* The application does not provide user authentication.
 
+## Future Scope
 
+The project can be further improved by adding:
 
-\## Limitations
+* GUI using JavaFX or Swing
+* Database integration using JDBC
+* Monthly and yearly expense reports
+* Graphical charts for spending analysis
+* User login and authentication
+* Export to CSV or PDF
+* Recurring expense management
+* More advanced budget recommendations
 
+## Learning Outcomes
 
+Through this project, the following Java concepts were implemented:
 
-\* The application is command-line based.
+* Classes and objects
+* Constructors
+* Inheritance
+* Method overriding
+* Polymorphism
+* Encapsulation
+* Enum
+* ArrayList
+* Exception handling
+* Custom exceptions
+* Multithreading
+* File I/O
+* Command-line application development
 
-\* Data is stored in a text file instead of a database.
+## Conclusion
 
-\* Transaction descriptions should not contain commas because comma-separated data is used for file storage.
+The Budget Planner is a simple Java-based application designed to help users manage their income and expenses from the command line. The project demonstrates important Java programming concepts including OOP, collections, exception handling, multithreading, and file handling.
 
+The project provides a practical example of applying Java concepts to a simple real-world problem while keeping the application easy to understand and operate.
 
+## Author
 
-\## Future Scope
+**Sanskruti Chanekar**
+**25BAI10603**
 
+B.Tech – Artificial Intelligence and Machine Learning
 
+VIT Bhopal University
 
-The project can be extended by adding:
+## License
 
-
-
-\* Monthly budget limits
-
-\* Date-wise transaction tracking
-
-\* Monthly expense reports
-
-\* Graphical user interface
-
-\* Database storage using JDBC
-
-\* Exporting reports
-
-\* More detailed financial analysis
-
-
-
-\## Author
-
-
-
-SANSKRUTI PRASHANT CHANEKAR 
-
-25BAI10603
-
-
-
-Developed as a Java project for the Programming in Java course.
-
-
-
+This project is developed for academic/educational purposes.
