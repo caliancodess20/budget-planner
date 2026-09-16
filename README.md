@@ -1,130 +1,247 @@
-# 🧠 NeuralWatch
-### Neuromorphic AI Integrity Monitor for Cybersecurity
+# Budget Planner
 
-> *"Every existing cybersecurity tool monitors network traffic — the road. NeuralWatch monitors the brain driving the car."*
+A simple command-line Budget Planner application developed in Java.
 
----
+The application allows users to record income and expenses, view transactions, search and delete expenses, calculate the remaining balance, set a budget limit with automatic alerts, and save/load budget data using a text file.
 
-## The Problem
+## Features
 
-Modern AI-powered cybersecurity systems use neural networks to detect threats. These networks store their "knowledge" in **synaptic weights** — numbers that change as the AI learns.
+* Add income
+* Add expenses
+* Categorize expenses
+* View all transactions
+* View expenses
+* Search expenses
+* Delete expenses
+* Calculate total income
+* Calculate total expenses
+* Calculate remaining balance
+* Set a monthly budget limit
+* Background thread that warns when 80% of the budget is used, and alerts when it's exceeded
+* Save data to a text file
+* Load previously saved data
+* Handle invalid amount and input errors
 
-A sophisticated attacker doesn't attack your system directly. They slowly feed the AI tiny amounts of corrupted data over weeks or months — gradually shifting its weights until the AI begins treating real attacks as normal traffic. This is called **neural poisoning**, and no consumer security product watches for it.
+## Technologies Used
 
-By the time the breach happens, the AI itself is compromised. Everyone was watching the door. Nobody was watching the guard.
+* Java
+* Object-Oriented Programming (OOP)
+* ArrayList
+* Inheritance
+* Polymorphism
+* Enum
+* Exception Handling
+* Multithreading
+* File I/O
+* BufferedReader
+* BufferedWriter
+* Command-Line Interface
 
----
+## Project Structure
 
-## Our Solution: NeuralWatch
-
-NeuralWatch is a three-layer neuromorphic security system that treats the AI's own neural weights as a security surface.
-
-### Layer 1 — Biometric Gesture Lock
-Only an authorized engineer, performing a specific hand gesture detected via webcam, can access the monitoring dashboard. Powered by **MediaPipe hand landmark detection**.
-
-### Layer 2 — Neuromorphic Drift Detection (LIF Model)
-NeuralWatch simulates a **Leaky Integrate-and-Fire (LIF) neuron** — the foundational model of neuromorphic computing — to monitor the AI's synaptic weights in real time.
-
+```text
+budget-planner/
+├── Main.java
+├── BudgetPlanner.java
+├── Transaction.java
+├── Income.java
+├── Expense.java
+├── Category.java
+├── BudgetCalculator.java
+├── InvalidAmountException.java
+├── FileManager.java
+├── BudgetAlertThread.java
+├── statement.md
+├── docs/
+│   ├── architecture.md
+│   ├── use-case-diagram.md
+│   ├── class-diagram.md
+│   ├── sequence-diagram.md
+│   ├── workflow-diagram.md
+│   └── storage-design.md
+├── data/
+│   └── budget.txt
+├── README.md
+└── .gitignore
 ```
-Normal learning  →  tiny random weight changes  →  membrane potential leaks away  →  no spike
-Attack in progress  →  consistent directional drift  →  membrane builds up  →  SPIKE FIRED  →  ALERT
+
+## Class Description
+
+### Main.java
+Contains the main method and command-line menu. It takes input from the user and calls the required operations.
+
+### BudgetPlanner.java
+Manages the collection of transactions using `ArrayList<Transaction>`. It provides operations such as adding, viewing, searching, and deleting transactions, and holds the current budget limit.
+
+### Transaction.java
+The base class for transactions. It stores common transaction information such as description and amount.
+
+### Income.java
+Extends the `Transaction` class and represents an income transaction.
+
+### Expense.java
+Extends the `Transaction` class and represents an expense. It also stores the expense category.
+
+### Category.java
+An enum containing the available expense categories: Food, Travel, Education, Shopping, Bills, Entertainment, Health, and Other.
+
+### BudgetCalculator.java
+Contains static methods for calculating total income, total expenses, and remaining balance.
+
+### InvalidAmountException.java
+A custom checked exception used when the user enters an amount that is zero or negative.
+
+### FileManager.java
+Handles saving transactions to and loading transactions from the `data/budget.txt` text file.
+
+### BudgetAlertThread.java
+Runs as a background daemon thread alongside the main program. Every 10 seconds it checks total expenses against the configured budget limit and prints a warning at 80% usage and an alert at 100% or more.
+
+## How to Run the Project
+
+### Step 1: Install Java
+Make sure the Java JDK is installed on your computer.
+
+Check the Java version using:
+```bash
+java -version
 ```
 
-The key insight: we don't just check if weights changed. We check **how they change over time** — using the same temporal pattern recognition that biological neurons use.
+Check the Java compiler using:
+```bash
+javac -version
+```
 
-### Layer 3 — Cryptographic Tamper-Evident Audit Log
-Every monitoring event is written to an **append-only log with SHA-256 chained signatures** — similar to blockchain. Each entry includes the hash of the previous entry. If an attacker gains access and tries to delete their tracks, the chain breaks immediately and a secondary alert fires.
-
----
-
-## Why This Is Different From Existing AI
-
-| Existing Security AI | NeuralWatch |
-|---------------------|-------------|
-| Monitors network traffic (the road) | Monitors the AI's brain (the driver) |
-| Detects known attack signatures | Detects behavioral drift over time |
-| Can be fooled by slow, patient attackers | Catches low-and-slow poisoning via LIF accumulation |
-| No audit trail for AI weight changes | Cryptographically signed weight-change history |
-| Logs are editable | Tamper-evident chained log — edits are instantly detected |
-
----
-
-## Neuromorphic Computing Explained
-
-Traditional computers process everything continuously using binary (0s and 1s). Neuromorphic computers mimic the human brain — neurons rest silently, then fire a **spike** only when a meaningful threshold is crossed. The timing between spikes carries the information.
-
-NeuralWatch applies this principle to cybersecurity:
-
-- **Membrane potential** accumulates with each suspicious weight drift
-- **Leak rate** naturally dissipates during normal, healthy learning
-- **Spike fires** when accumulated drift crosses the threshold — even from a slow, multi-day attack
-
-This is the **Leaky Integrate-and-Fire (LIF) model** — the same model used in neuromorphic research at Intel (Loihi chip) and IBM (TrueNorth chip).
-
----
-
-## Real-World Relevance
-
-The **SolarWinds attack (2020)** — one of the largest cyberattacks in history — went undetected for 9 months. Attackers moved slowly and patiently. Every AI security system gave them a green light because each individual action looked normal.
-
-NeuralWatch's LIF model would have caught the cumulative drift in the AI's behavior patterns.
-
----
-
-## Tech Stack
-
-- **Python 3.10+**
-- **NumPy** — synaptic weight simulation
-- **Streamlit** — real-time dashboard
-- **MediaPipe** — hand gesture detection (Layer 1)
-- **OpenCV** — webcam access
-- **hashlib (SHA-256)** — tamper-evident log chain (Layer 3)
-
----
-
-## How to Run
+### Step 2: Open the Project Folder
+Open a terminal or command prompt and navigate to the project folder.
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/YOUR_USERNAME/neuralwatch
-cd neuralwatch
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Launch NeuralWatch
-streamlit run dashboard.py
+cd budget-planner
 ```
 
-Then open your browser at `http://localhost:8501`
+### Step 3: Compile the Java Files
+Compile all Java source files using:
+```bash
+javac *.java
+```
 
-**For gesture authentication:** Allow webcam access and show 2 fingers for 2 seconds.
-**For demo without webcam:** Click "Demo Bypass."
+### Step 4: Run the Application
+Run the program using:
+```bash
+java Main
+```
 
----
+## Menu Options
 
-## Demo Walkthrough
+When the application starts, the following menu is displayed:
 
-1. **Launch** — Login screen appears, requiring biometric gesture (Layer 1)
-2. **Authenticate** — Show 2 fingers to webcam OR click Demo Bypass
-3. **Start Monitoring** — Click ▶ Start in sidebar
-4. **Observe** — Watch neural drift stay safely below threshold (green)
-5. **Activate Attack** — Toggle "Simulate Attacker" in sidebar
-6. **Watch** — Drift graph rises, membrane potential builds, spike fires, red alert activates
-7. **Rollback** — Click Rollback Brain — brain restored to clean baseline
-8. **Tamper Demo** — Click "Simulate Tamper Attack" then "Verify Log Chain" to see tamper detection
+```text
+===== BUDGET PLANNER =====
+1. Add Income
+2. Add Expense
+3. View All Transactions
+4. View Expenses
+5. Search Expense
+6. Delete Expense
+7. Show Budget Summary
+8. Set Budget Limit
+9. Save Data
+10. Load Data
+11. Exit
+```
 
----
+Select an option by entering its corresponding number.
 
-## Team
+## Data Storage
 
-Built at [Hackathon Name] | Domain: Cybersecurity | Track: Neuromorphic Computing
+Budget data is stored in:
+```text
+data/budget.txt
+```
 
----
+The application creates the `data` folder automatically if it doesn't already exist. The saved file contains transaction information that can be loaded again using the Load Data option.
 
-## References
+See [docs/storage-design.md](docs/storage-design.md) for the exact file format.
 
-- Mahowald et al. (2023) — Leaky Integrate-and-Fire neuron models in neuromorphic hardware
-- Intel Loihi 2 neuromorphic chip documentation
-- MITRE ATT&CK Framework — ML Model Poisoning (T1565)
-- SolarWinds attack post-mortem (CISA, 2021)
+## Example
+
+Example transactions:
+```text
+Income: Scholarship
+Amount: Rs. 5000
+
+Expense: Food
+Amount: Rs. 500
+Category: FOOD
+```
+
+The budget summary will display:
+```text
+Total Income: Rs. 5000.0
+Total Expense: Rs. 500.0
+Remaining Balance: Rs. 4500.0
+```
+
+## Design Documentation
+
+See the `docs/` folder for:
+* `architecture.md` — system architecture diagram
+* `use-case-diagram.md` — use case diagram
+* `class-diagram.md` — class diagram
+* `sequence-diagram.md` — sequence diagram (add expense + budget alert flow)
+* `workflow-diagram.md` — CLI menu process flow
+* `storage-design.md` — text-file storage format (in place of an ER diagram, since no database is used)
+
+These render as diagrams automatically when viewed on GitHub.
+
+## OOP Concepts Used
+
+The project demonstrates several Java Object-Oriented Programming concepts.
+
+### Encapsulation
+Transaction data is kept private and accessed through methods such as getters.
+
+### Inheritance
+`Income` and `Expense` inherit common properties and methods from the `Transaction` class.
+
+### Polymorphism
+The application stores both `Income` and `Expense` objects in an `ArrayList<Transaction>` and uses method overriding for `displayTransaction()`.
+
+### Abstraction of Responsibilities
+Different classes are responsible for different tasks such as transaction management, calculation, file handling, and background monitoring.
+
+## Exception Handling
+
+The application handles invalid user input using exception handling.
+
+A custom `InvalidAmountException` is used when an income or expense amount is less than or equal to zero.
+
+`NumberFormatException` is also handled when the user enters an invalid numeric value.
+
+## Testing
+
+Manual testing was performed by running the compiled application and exercising each menu option: adding valid and invalid (zero/negative) amounts, viewing and searching transactions, deleting a transaction, setting a budget limit below existing spend to confirm the alert thread prints a warning, and saving then reloading data in a fresh run to confirm persistence.
+
+## Limitations
+
+* The application is command-line based.
+* Data is stored in a text file instead of a database.
+* Transaction descriptions should not contain commas because comma-separated data is used for file storage.
+
+## Future Scope
+
+The project can be extended by adding:
+
+* Date-wise transaction tracking
+* Monthly expense reports
+* Graphical user interface
+* Database storage using JDBC
+* Exporting reports
+* More detailed financial analysis
+
+## Author
+
+SANSKRUTI PRASHANT CHANEKAR
+25BAI10603
+
+Developed as a Java project for the Programming in Java course.
