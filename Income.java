@@ -7,6 +7,6 @@ public class Income extends Transaction {
     @Override
     public void displayTransaction() {
         System.out.println("Income: " + getDescription());
-        System.out.println("Amount: ₹" + getAmount());
+        System.out.println("Amount: Rs. " + getAmount());
     }
 }

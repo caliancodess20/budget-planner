@@ -14,7 +14,7 @@ public class Expense extends Transaction {
     @Override
     public void displayTransaction() {
         System.out.println("Expense: " + getDescription());
-        System.out.println("Amount: ₹" + getAmount());
+        System.out.println("Amount: Rs. " + getAmount());
         System.out.println("Category: " + category);
     }
 }

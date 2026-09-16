@@ -18,6 +18,6 @@ public class Transaction {
 
     public void displayTransaction() {
         System.out.println("Description: " + description);
-        System.out.println("Amount: ₹" + amount);
+        System.out.println("Amount: Rs. " + amount);
     }
 }
