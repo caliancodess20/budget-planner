@@ -24,18 +24,18 @@ Handle invalid amount and input errors
 
 # Technologies Used
 
-Java
-Object-Oriented Programming (OOP)
-ArrayList
-Inheritance
-Polymorphism
-Enum
-Exception Handling
-Multithreading
-File I/O
-BufferedReader
-BufferedWriter
-Command-Line Interface
+### Java
+### Object-Oriented Programming (OOP)
+### ArrayList
+### Inheritance
+### Polymorphism
+### Enum
+### Exception Handling
+### Multithreading
+### File I/O
+### BufferedReader
+### BufferedWriter
+### Command-Line Interface
 
 # Project Structure
 
