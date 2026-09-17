@@ -82,33 +82,6 @@ The base class for transactions. It stores transaction information such as descr
 ## Income.java
 
 Extends the Transaction class. Represents an income transaction.
-# Project Structure
-
-```text
-budget-planner/
-├── Main.java
-├── BudgetPlanner.java
-├── Transaction.java
-├── Income.java
-├── Expense.java
-├── Category.java
-├── BudgetCalculator.java
-├── InvalidAmountException.java
-├── FileManager.java
-├── BudgetAlertThread.java
-├── statement.md
-├── docs/
-│   ├── architecture.md
-│   ├── use-case-diagram.md
-│   ├── class-diagram.md
-│   ├── sequence-diagram.md
-│   ├── workflow-diagram.md
-│   └── storage-design.md
-├── data/
-│   └── budget.txt
-├── README.md
-└── .gitignore
-```
 
 ## Expense.java
 
