@@ -22,29 +22,74 @@ Save data to a text file
 Load previously saved data
 Handle invalid amount and input errors
 
-# Technologies Used
+## Technologies Used
+
+### Programming Language
+
+* **Java** — Used to develop the complete Budget Planner application.
+
+### Core Java Concepts
+
+* **Object-Oriented Programming (OOP)** — Classes, objects, encapsulation, inheritance, and polymorphism.
+* **ArrayList** — Used to store income and expense transactions.
+* **Enum** — Used for predefined expense categories.
+* **Exception Handling** — Used for invalid amounts and invalid numeric input.
+* **Multithreading** — Used for background budget monitoring and alerts.
+
+### File Handling
+
+* **Java File I/O** — Used to save and load transaction data.
+* **BufferedReader** — Used to read saved transaction data from `data/budget.txt`.
+* **BufferedWriter** — Used to write transaction data to `data/budget.txt`.
+
+### User Interface
+
+* **Command-Line Interface (CLI)** — Used to interact with the application through the terminal.
+
+### Development Tools
+
+* **JDK (Java Development Kit)** — Used to compile and run the Java source code.
+* **Git & GitHub** — Used for source-code version control and project submission.
+``
+# Java Concepts Used
 
 ### Java
-The Java programming language is utilized to develop the complete application of Budget Planner. Several classes comprise the application, namely, Main, BudgetPlanner, Transaction, Income, Expense, BudgetCalculator, FileManager, and BudgetAlertThread . These classes employ Java for the purpose of acquiring user input, processing transactions, performing calculations, managing files, handling exceptions, and executing background processes for continuous budget monitoring.
 
-### Object-oriented Programming (OOP)
+Java is the programming language used for the entire Budget Planner application. The program is built using classes such as `Main` `BudgetPlanner` `Transaction` `Income` `Expense` `BudgetCalculator` `FileManager` and `BudgetAlertThread`.
 
-The principles of OOP have been applied by organizing the application around various classes, as discussed above. For instance,
-`Transaction` stores the common description and amount data of all transaction types while `Income` and `Expense` denote distinct transaction types. `BudgetPlanner` maintains the list of all transactions and the set budget limit, `BudgetCalculator` executes all calculations relating to income, expenses, and balance, while `FileManager` oversees the storage and retrieval of transaction data.
+The application uses Java for receiving user input, processing transactions performing calculations handling files managing errors and running background tasks like budget monitoring.
 
-This way, the dissimilar aspects of the application have been appropriately segregated while enabling these classes to interact with one another.
+---
+### Object-Oriented Programming (OOP)
 
+The project follows object-oriented programming principles by organizing the code into classes based on what they do.
+
+For example:
+
+* The `Transaction` class holds data like description and amount.
+
+* The `Income` and `Expense` classes represent types of transactions.
+
+* The `BudgetPlanner` class manages the list of transactions and the budget limit.
+
+* The `BudgetCalculator` class handles income, expense and balance calculations.
+
+* The `FileManager` class takes care of saving and loading data.
+
+This design keeps the code clean. Makes it easier for the classes to work together.
+
+---
 ### ArrayList
 
-`ArrayList` has been employed in `BudgetPlanner` for the purpose of storing all expense and income transactions as illustrated by the following code segment.
+An `ArrayList` is used in the `BudgetPlanner` class to store all transactions.
 
 ```java
 
-private ArrayList transactions;
+ArrayList<Transaction> transactions;
 
 ```
 
-The arraylist is instantiated when initializing the class with the following line of code.
+The list is created in the constructor like this:
 
 ```java
 
@@ -52,7 +97,7 @@ transactions = new ArrayList<>();
 
 ```
 
-All transactions are added to the arraylist by implementing the following syntax.
+When a new transaction is added it is stored using:
 
 ```java
 
@@ -60,11 +105,17 @@ transactions.add(transaction);
 
 ```
 
-The same arraylist is used for viewing, searching, deleting and calculating all transactions. Additionally, the use of `ArrayList` ensures that all expense and income transactions can be conveniently stored within the same data structure.
+This same list is used when viewing, searching, deleting or calculating transactions.
+
+Using `ArrayList<Transaction>` allows both `Income` and `Expense` objects to be stored in the collection.
+
+---
 
 ### Inheritance
 
-The concept of inheritance is demonstrated by the relationship between `Transaction` and other transaction classes. This is achieved by enabling `Income` and `Expense` to extend `Transaction`, as illustrated by the following code segment.
+Inheritance is used to build a hierarchy between the `Transaction` class and its specialized versions.
+
+The `Income` class extends `Transaction`:
 
 ```java
 
@@ -72,23 +123,41 @@ public class Income extends Transaction
 
 ```
 
+Similarly the `Expense` class extends `Transaction`:
+
 ```java
 
 public class Expense extends Transaction
 
 ```
 
-This way, the common attributes and methods of `Income` and `Expense` are defined once in `Transaction` instead of duplicating them.
+The shared properties like `description` and `amount` are defined once in `Transaction`. The `Income` and `Expense` classes add their specific details.
+
+This avoids writing the code multiple times.
+
+---
 
 ### Polymorphism
 
-Polymorphism is demonstrated by the fact that `ArrayList` can hold objects of type `Income` and `Expense`. Such an approach is possible due to the fact that `Income` and `Expense` are subclasses of `Transaction`. This is demonstrated by the following code segments.
+Polymorphism is used by storing types of transactions in a single list:
 
 ```java
 
-transactions.add(new Income(description, amount));
+ArrayList<Transaction>
 
 ```
+
+Both `Income` and `Expense` objects can be added to this list as if they were `Transaction` objects.
+
+For example:
+
+```java
+
+Income(description amount));
+
+```
+
+and:
 
 ```java
 
@@ -96,7 +165,9 @@ transactions.add(new Expense(description, amount, category));
 
 ```
 
-Polymorphism is also demonstrated by the override of `displayTransaction()` method in `Income` and `Expense`. As a result, when `BudgetPlanner` executes the following line of code
+The `displayTransaction()` method is overridden in both `Income` and `Expense`.
+
+When the `BudgetPlanner` calls:
 
 ```java
 
@@ -104,7 +175,9 @@ transaction.displayTransaction();
 
 ```
 
-it invokes the overridden method in `Income` or `Expense`, depending on the reference of `transaction`. Similar polymorphism is demonstrated by `BudgetCalculator` when it executes the following lines of code.
+the version of the method runs based on the actual object type.
+
+The `BudgetCalculator` also checks the type of transaction using:
 
 ```java
 
@@ -112,17 +185,23 @@ if (transaction instanceof Income)
 
 ```
 
+or:
+
 ```java
 
 if (transaction instanceof Expense)
 
 ```
 
+---
+
 ### Encapsulation
 
-Encapsulation has been demonstrated by the fact that all instance variables have been declared as `private` while public getters and setters have been defined. For instance,
+Encapsulation is used to keep a class’s data private and allow access through methods.
 
-```java
+For example the `Transaction` class defines:
+
+```
 
 private String description;
 
@@ -130,35 +209,39 @@ private double amount;
 
 ```
 
-in `Transaction` are not directly accessible from other classes. Rather, other classes utilize the following public getters and setters to manipulate the instance variables.
+These fields cannot be accessed directly from other classes. Instead they are accessed through methods like:
 
 ```java
 
 public String getDescription()
 
-public double getAmount()
+double getAmount()
 
 ```
 
-Similarly, the following instance variables in `BudgetPlanner` are also encapsulated.
+Similarly the `BudgetPlanner` class keeps its transaction list and budget limit private:
 
 ```java
 
-private ArrayList transactions;
+private ArrayList<Transaction> transactions;
 
 private double budgetLimit;
 
 ```
 
-I found this concept very interesting since encapsulation ensures that manipulation of data is controlled and that application logic is contained within classes. This way, other classes cannot directly access instance variables of other classes.
+Getter and setter methods are used to read or change these values.
+
+This was one of the concepts that took some time to understand during development because it separates the data from the operations that work on that data.
+
+---
 
 ### Enum
 
-The concept of `enum` has been demonstrated by the fact that the categories of expenses have been encapsulated in an `enum` class as illustrated by the following code segment.
+An enum is used to define the list of expense categories.
+
+The `Category` class includes:
 
 ```java
-
-public class Category {
 
 public enum Category {
 
@@ -180,27 +263,29 @@ OTHER
 
 }
 
-}
-
 ```
 
-As a result, the following lines of code can be used to print all expense categories.
+When an expense is added the user picks one of these options.
+
+The program also uses:
 
 ```java
 
-for (Category.Category category : Category.Category.values()) {
-
-System.out.println(category);
-
-}
+Category.values()
 
 ```
 
-This way, the categories of expenses cannot be manipulated by the user or other classes. Rather, when the user is required to enter an expense category, the selection is limited to the predefined categories.
+to show the categories to the user.
+
+Using an enum makes sure only valid categories are used and prevents typos or invalid entries.
+
+---
 
 ### Exception Handling
 
-The concept of exception handling is demonstrated by the fact that the application utilizes try/catch blocks to handle unexpected events or errors during execution. For instance, the following exception class, which extends the `Exception` class, is utilized to indicate instances where an invalid amount has been entered.
+Exception handling is used to deal with user input and avoid crashes.
+
+The project includes a custom exception:
 
 ```java
 
@@ -208,19 +293,21 @@ public class InvalidAmountException extends Exception
 
 ```
 
-The following line of code, for instance, demonstrates how this exception is triggered when a negative or zero amount is entered.
+It is thrown when an amount is less than or equal to zero.
+
+For example:
 
 ```java
 
 if (amount <= 0) {
 
-throw new InvalidAmountException("Amount must be greater than zero.");
+throw InvalidAmountException("Amount must be greater than zero.");
 
 }
 
 ```
 
-This exception, alongside other exceptions such as `NumberFormatException` and a generic `Exception` handler, are caught and handled as illustrated by the following code segment in `Main.java`.
+In `Main.java` the exception is caught using:
 
 ```java
 
@@ -228,9 +315,27 @@ catch (InvalidAmountException e)
 
 ```
 
+The program also handles `NumberFormatException` when the input cannot be converted into a number.
+
+There is also a Exception` catch for any other unexpected issues.
+
+---
+
 ### Multithreading
 
-Multithreading is demonstrated by the implementation of a background thread, which continually monitors the budget in the background while the user interacts with the main application menu. This is achieved by the following code segment in `Main.java`.
+Multithreading is used for budget monitoring.
+
+A class called:
+
+```java
+
+public class BudgetAlertThread extends Thread
+
+```
+
+runs in the background while the main program is running.
+
+In `Main.java` the thread is. Started like this:
 
 ```java
 
@@ -242,15 +347,19 @@ alertThread.start();
 
 ```
 
-While the main menu is running, the background thread checks if the percentage of the total expense is greater than or equal to the set budget limit in the background using the following line of code.
+The background thread periodically checks the expenses against the budget limit.
 
-```java
+It calculates the usage percentage using:
+
+```
 
 double percentage = (totalExpense / budget) * 100;
 
 ```
 
-The background thread then warns the user when the budget is at 80% and the budget is exceeded when the percentage reaches or exceeds 100%. Finally, the background thread waits for 10 seconds before proceeding to the next iteration of the loop as illustrated by the following line of code.
+It shows a warning when spending reaches 80% of the budget and a full alert when spending hits or exceeds 100%.
+
+The thread waits 10 seconds between checks:
 
 ```java
 
@@ -258,11 +367,23 @@ Thread.sleep(10000);
 
 ```
 
+This allows the budget monitoring to run without interrupting the menu.
+
+---
+
 ### File I/O
 
-File I/O is demonstrated by the fact that the application can be saved to and loaded from a file. Specifically, a file named `budget.txt` under the `data` directory is utilized to store the list of all income and expense transactions.
+File I/O is used to save transaction data to a file and load it back when needed.
 
-`FileManager` class implements the methods for saving and loading transactions. The following code segments, for instance, demonstrate how transactions are saved to the file.
+The program uses a file named:
+
+```text
+
+data/budget.txt
+
+```
+
+The `FileManager` class has methods:
 
 ```java
 
@@ -270,21 +391,37 @@ saveTransactions(...)
 
 ```
 
-When the file is reloaded, the records in the file are utilized to recreate the various transactions.
+and:
+
+```java
+
+loadTransactions()
+
+```
+
+When saving the application writes each transaction to the file.
+
+When loading it reads the saved lines. Creates the proper `Income` and `Expense` objects.
+
+This gives persistence without using a database.
+
+---
 
 ### BufferedReader
 
-`BufferedReader` is employed in `FileManager.java` for reading the content of the file containing all saved transactions. The file is initially opened using the following code segment.
+`BufferedReader` is used in `FileManager.java` when reading saved transaction data.
+
+The file is opened like this:
 
 ```java
 
 BufferedReader reader =
 
-new BufferedReader(new FileReader(FILE_NAME));
+BufferedReader(new FileReader(FILE_NAME));
 
 ```
 
-A loop is then utilized to read the content of the file as illustrated by the following code segment.
+The program reads the file line by line:
 
 ```java
 
@@ -298,19 +435,25 @@ while ((line = reader.readLine()) != null) {
 
 ```
 
+Each line is split into its parts. Used to rebuild a transaction object.
+
+---
+
 ### BufferedWriter
 
-`BufferedWriter` is employed in `FileManager.java` for the purpose of writing transaction data to the file. A `BufferedWriter` object is instantiated using the following code segment.
+`BufferedWriter` is used in `FileManager.java` when saving transaction data.
+
+The writer is created with:
 
 ```java
 
 BufferedWriter writer =
 
-new BufferedWriter(new FileWriter(FILE_NAME));
+BufferedWriter(new FileWriter(FILE_NAME));
 
 ```
 
-The application then utilizes the `BufferedWriter` object to write transaction information to the `budget.txt` file and move to a new line as illustrated by the following code segment.
+The application writes transaction details to the file and moves to the next line using:
 
 ```java
 
@@ -320,20 +463,23 @@ writer.newLine();
 
 ```
 
-This is useful when saving income and expense data to the file.
+This is used to store both income and expense records in `data/budget.txt`.
 
+---
 
-### Command-line interface
+### Command-Line Interface
 
-Finally, the application employs the command-line interface rather than the graphical user interface (GUI). `Main.java` employs `Scanner` to read the user input as illustrated by the following line of code.
+The Budget Planner uses a command-line interface of a graphical user interface.
+
+The `Main.java` class uses `Scanner` to get input from the user:
 
 ```java
 
-Scanner scanner = new Scanner(System.in);
+Scanner scanner = Scanner(System.in);
 
 ```
 
-The application presents an 11-option menu as illustrated by the following code segment.
+The application shows a menu, with 11 options:
 
 ```text
 
@@ -361,15 +507,9 @@ The application presents an 11-option menu as illustrated by the following code 
 
 ```
 
-The user then selects an option, which is read and processed by the following line of code.
+The user’s choice is. Used to run the correct function.
 
-```text
-
-int choice = Integer.parseInt(scanner.nextLine());
-
-```
-
-This approach is very convenient since the user can directly input the desired option from the command-line interface (CLI) without utilizing a GUI.
+This keeps the application simple. Lets users control everything directly from the terminal.
 
 # Project Structure
 
