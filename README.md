@@ -39,6 +39,29 @@ Command-Line Interface
 
 # Project Structure
 
+
+
+
+# Class Description
+
+## Main.java
+
+Contains the method and command-line menu. It takes input from the user. Calls the required operations.
+
+## BudgetPlanner.java
+
+Manages the collection of transactions using ArrayList<Transaction>. It provides operations such as adding, viewing, searching and deleting transactions. Holds the current budget limit.
+
+## Transaction.java
+
+The base class for transactions. It stores transaction information such as description and amount.
+
+## Income.java
+
+Extends the Transaction class. Represents an income transaction.
+# Project Structure
+
+```text
 budget-planner/
 ├── Main.java
 ├── BudgetPlanner.java
@@ -62,25 +85,7 @@ budget-planner/
 │   └── budget.txt
 ├── README.md
 └── .gitignore
-
-
-# Class Description
-
-## Main.java
-
-Contains the method and command-line menu. It takes input from the user. Calls the required operations.
-
-## BudgetPlanner.java
-
-Manages the collection of transactions using ArrayList<Transaction>. It provides operations such as adding, viewing, searching and deleting transactions. Holds the current budget limit.
-
-## Transaction.java
-
-The base class for transactions. It stores transaction information such as description and amount.
-
-## Income.java
-
-Extends the Transaction class. Represents an income transaction.
+```
 
 ## Expense.java
 
