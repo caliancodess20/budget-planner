@@ -1,4 +1,4 @@
-Budget Planner
+# Budget Planner
 
 A simple command-line Budget Planner application developed in Java.
 
