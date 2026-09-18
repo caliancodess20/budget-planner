@@ -654,6 +654,27 @@ When the application starts the following menu is displayed:
 ```
 
 Select an option by entering its number.
+## Screenshots
+
+### Add Income
+
+![Add Income](docs/screenshots/income-add.png)
+
+### Add Expense
+
+![Add Expense](docs/screenshots/add-expense.png)
+
+### Set Budget Limit
+
+![Set Budget Limit](docs/screenshots/budget-limit-set.png)
+
+### View All Transactions
+
+![View All Transactions](docs/screenshots/all-transactions.png)
+
+### Save and Exit
+
+![Save and Exit](docs/screenshots/save-and-exit.png)
 
 # Data Storage
 
